@@ -6,6 +6,7 @@ export const ADD_JOB_SUCCESS = 'ADD_JOB_SUCCESS'
 export const DELETE_JOB_SUCCESS = 'DELETE_JOB_SUCCESS'
 export const EDIT_JOB_SUCCESS = 'EDIT_JOB_SUCCESS'
 export const GET_JOBS_SUCCESS = 'GET_JOBS_SUCCESS'
+export const CLEAR_JOBS_SUCCESS = 'CLEAR_JOBS_SUCCESS'
 
 const jobsLoading = () => ({
     type: JOBS_LOADING
@@ -34,6 +35,10 @@ const editJobSuccess = (id, updates) => ({
         id,
         updates
     }
+})
+
+const clearJobsSuccess = () => ({
+    type: CLEAR_JOBS_SUCCESS
 })
 
 export const getJobs = () => {
@@ -96,5 +101,11 @@ export const editJob = ({
             .catch(err => {
                 dispatch(getErrors(err.message))
             })
+    }
+}
+
+export const clearJobs = () => {
+    return dispatch => {
+        dispatch(clearJobsSuccess())
     }
 }

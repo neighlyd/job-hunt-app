@@ -1,9 +1,10 @@
 const { 
     JOBS_LOADING, 
     ADD_JOB_SUCCESS, 
-    GET_JOBS_SUCCESS,
+    CLEAR_JOBS_SUCCESS,
     DELETE_JOB_SUCCESS,
-    EDIT_JOB_SUCCESS
+    EDIT_JOB_SUCCESS,
+    GET_JOBS_SUCCESS
 } = require('../actions/jobs')
 
 const initialState = {
@@ -50,6 +51,12 @@ export default (state = initialState, action) => {
                         return job
                     }
                 })
+            }
+        case CLEAR_JOBS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                jobs: []
             }
         default:
             return state

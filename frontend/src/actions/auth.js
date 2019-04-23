@@ -1,5 +1,6 @@
 import setAuthToken from '../api/setAuthToken'
 import getErrors from './errors'
+import { getJobs, clearJobs } from './jobs'
 const axios = require('axios')
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER'
@@ -30,6 +31,7 @@ export const login = ({
                 localStorage.setItem('token', res.data.token)
                 setAuthToken(res.data.token)
                 dispatch(setCurrentUser(res.data))
+                dispatch(getJobs())
             })
             .catch(err => {
                 dispatch(getErrors(err.message))
@@ -46,6 +48,7 @@ export const logout = (token) => {
                 localStorage.removeItem('token')
                 setAuthToken(false)
                 dispatch(setCurrentUser({}))
+                dispatch(clearJobs())
             })
             .catch(err => {
                 dispatch(getErrors(err))
