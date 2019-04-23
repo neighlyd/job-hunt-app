@@ -1,0 +1,55 @@
+import setAuthToken from '../api/setAuthToken'
+import getErrors from './errors'
+const axios = require('axios')
+
+export const SET_CURRENT_USER = 'SET_CURRENT_USER'
+export const AUTH_REQUEST = 'AUTH_REQUEST'
+
+export const setCurrentUser = user => ({
+    type: SET_CURRENT_USER,
+    payload: user
+})
+
+const authRequest = () => ({
+    type: AUTH_REQUEST
+})
+
+export const login = ({
+    email,
+    password
+}) => {
+    return dispatch => {
+        dispatch(authRequest())
+        
+        axios
+            .post('http://localhost:3000/users/login', {
+                email,
+                password
+            })
+            .then(res => {
+                localStorage.setItem('token', res.data.token)
+                setAuthToken(res.data.token)
+                dispatch(setCurrentUser(res.data))
+            })
+            .catch(err => {
+                dispatch(getErrors(err.message))
+            })
+    }
+}
+
+export const logout = (token) => {
+    return dispatch => {
+        dispatch(authRequest())
+        axios
+            .post('http://localhost:3000/users/logout')
+            .then(res => {
+                localStorage.removeItem('token')
+                setAuthToken(false)
+                dispatch(setCurrentUser({}))
+            })
+            .catch(err => {
+                dispatch(getErrors(err))
+            })
+
+    }
+}

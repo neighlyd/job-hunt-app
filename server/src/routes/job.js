@@ -1,7 +1,6 @@
 const express = require('express')
 
-const { Job, APPLICATION_STAGES } = require('../models/job')
-const User = require('../models/user')
+const { Job } = require('../models/job')
 const authenticate = require('../middleware/authenticate')
 const validateID = require('../middleware/validateID')
 
@@ -13,14 +12,14 @@ router.post('/jobs', authenticate, async (req, res) => {
     const isValidOperation = fields.every(field => allowedFields.includes(field))
 
     if (!isValidOperation) {
-        res.status(400).send({errors: {'fieldError': 'Invalid Fields Submitted'}})
+        return res.status(400).send({errors: {'fieldError': 'Invalid Fields Submitted'}})
     }
     
     try {
         const job = new Job({...req.body, applicant: req.user._id})
         const doc = await job.save()
         res.send(doc)
-    } catch (e) {
+    } catch (e) {        
         res.status(400).send(e)
     }
 })
