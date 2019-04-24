@@ -14,6 +14,7 @@ export class AddJobPage extends React.Component {
     render(){
         return (
         <div>
+            {console.log('ping')}
             <div className='page-header'>
                 <div className='container'>
                     <h1 className='page-header__title'>Add Expense</h1>

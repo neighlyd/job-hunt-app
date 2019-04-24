@@ -42,10 +42,8 @@ const clearJobsSuccess = () => ({
 })
 
 export const getJobs = () => {
-    return dispatch => {
-        dispatch(jobsLoading())
-    
-        axios
+    return (dispatch, getState) => {
+        return axios
             .get('/jobs')
             .then(res => {
                 dispatch(getJobsSuccess(res.data.jobs))
@@ -60,7 +58,7 @@ export const getJobs = () => {
 export const addJob = (job) => {
     return dispatch => {
         dispatch(jobsLoading())
-        axios
+        return axios
             .post('/jobs', job)
             .then(res => {
                 dispatch(addJobSuccess(res.data))
@@ -76,7 +74,7 @@ export const deleteJob = ({
 }) => {
     return dispatch => {
         dispatch(jobsLoading())
-        axios
+        return axios
             .delete(`/jobs/${id}`)
             .then(res => {
                 dispatch(deleteJobSuccess(id))
@@ -93,7 +91,7 @@ export const editJob = ({
 }) => {
     return dispatch => {
         dispatch(jobsLoading())
-        axios
+        return axios
             .patch(`jobs/${id}`, updates)
             .then(res => {
                 dispatch(editJobSuccess(res.data.job._id, res.data.job))
@@ -106,6 +104,9 @@ export const editJob = ({
 
 export const clearJobs = () => {
     return dispatch => {
-        dispatch(clearJobsSuccess())
+        return new Promise ((resolve) => {
+            dispatch(clearJobsSuccess())
+            return resolve()
+        })
     }
 }

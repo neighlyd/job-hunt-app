@@ -2,9 +2,9 @@ const request = require('supertest')
 const expect = require('expect')
 const { ObjectID } = require('mongodb')
 
-const app = require('../src/app')
-const { Job } = require('../src/models/job')
-const User = require('../src/models/user')
+const app = require('../server/app')
+const { Job } = require('../server/models/job')
+const User = require('../server/models/user')
 const { jobs, users, setupDatabase } = require('./fixtures/db')
 
 beforeEach(setupDatabase)

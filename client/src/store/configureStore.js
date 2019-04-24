@@ -27,9 +27,10 @@ const composedEnhancers = compose(
     ...enhancers
 )
 
-const store = createStore(
-    rootReducer(history),
-    composedEnhancers
-)
-
-export default store
+export default () => {
+    const store = createStore(
+        rootReducer(history),
+        composedEnhancers
+    )
+    return store
+}

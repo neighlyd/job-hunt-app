@@ -11,15 +11,13 @@ import PublicRoute from './PublicRoute'
 
 const AppRouter = () => (
     <div>
-        <main>
-            <Switch>
-                <PublicRoute exact path='/' component={LoginPage}/>
-                <PrivateRoute exact path='/dashboard' component={Dashboard} />
-                <PrivateRoute path='/create' component={AddJobPage}/>
-                <PrivateRoute path="/edit/:id" component={EditJobItem} />
-                <Route component={NotFoundPage} />
-            </Switch>
-        </main>
+        <Switch>
+            <PublicRoute exact path='/' component={LoginPage}/>
+            <PrivateRoute exact path='/dashboard' component={Dashboard} />
+            <PrivateRoute path='/create' component={AddJobPage}/>
+            <PrivateRoute path="/edit/:id" component={EditJobItem} />
+            <Route component={NotFoundPage} />
+        </Switch>
     </div>
 )
 

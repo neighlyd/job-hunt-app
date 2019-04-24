@@ -15,6 +15,15 @@ const authRequest = () => ({
     type: AUTH_REQUEST
 })
 
+export const setUser = (user) => {
+    return dispatch => {
+        return new Promise ((resolve) => {
+            dispatch(setCurrentUser(user))
+            return resolve()
+        })
+    }
+} 
+
 export const login = ({
     email,
     password
