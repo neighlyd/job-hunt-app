@@ -23,7 +23,7 @@ export const login = ({
         dispatch(authRequest())
         
         axios
-            .post('http://localhost:3000/users/login', {
+            .post('users/login', {
                 email,
                 password
             })
@@ -43,7 +43,7 @@ export const logout = (token) => {
     return dispatch => {
         dispatch(authRequest())
         axios
-            .post('http://localhost:3000/users/logout')
+            .post('users/logout')
             .then(res => {
                 localStorage.removeItem('token')
                 setAuthToken(false)

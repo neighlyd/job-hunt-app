@@ -46,7 +46,7 @@ export const getJobs = () => {
         dispatch(jobsLoading())
     
         axios
-            .get('http://localhost:3000/jobs')
+            .get('/jobs')
             .then(res => {
                 dispatch(getJobsSuccess(res.data.jobs))
             })
@@ -61,7 +61,7 @@ export const addJob = (job) => {
     return dispatch => {
         dispatch(jobsLoading())
         axios
-            .post('http://localhost:3000/jobs', job)
+            .post('/jobs', job)
             .then(res => {
                 dispatch(addJobSuccess(res.data))
             })
@@ -77,7 +77,7 @@ export const deleteJob = ({
     return dispatch => {
         dispatch(jobsLoading())
         axios
-            .delete(`http://localhost:3000/jobs/${id}`)
+            .delete(`/jobs/${id}`)
             .then(res => {
                 dispatch(deleteJobSuccess(id))
             })
@@ -94,7 +94,7 @@ export const editJob = ({
     return dispatch => {
         dispatch(jobsLoading())
         axios
-            .patch(`http://localhost:3000/jobs/${id}`, updates)
+            .patch(`jobs/${id}`, updates)
             .then(res => {
                 dispatch(editJobSuccess(res.data.job._id, res.data.job))
             })
