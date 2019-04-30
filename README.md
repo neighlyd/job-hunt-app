@@ -1,5 +1,5 @@
 # Job Hunting App
-<h2> You are more than your job hunt.</h2>
+<h3> You are more than your job hunt.</h3>
 
 Job hunting sucks. It is emotionally and physically draining. The process is littered with defeats both large and small, from having your application summarily ignored to dealing with the psychological isolation of spending all day alone. The Job Hunting App is intended to help alleviate these feelings, boost confidence, and motivate you to get the job that you deserve.
 
