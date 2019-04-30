@@ -1,14 +1,25 @@
 # Job Hunting App
-## You are more than your job hunt.
+<h2> You are more than your job hunt.</h2>
 
 Job hunting sucks. It is emotionally and physically draining. The process is littered with defeats both large and small, from having your application summarily ignored to dealing with the psychological isolation of spending all day alone. The Job Hunting App is intended to help alleviate these feelings, boost confidence, and motivate you to get the job that you deserve.
 
 *The Job Hunting Application is not currently live. This space will be updated with a URL once it is launched.*
 
 ### Table of Contents
-1. [Description](#description)
-2. [Installation](#installation)
-3. [Acknowledgements](#acknowledgements)
+- [Job Hunting App](#job-hunting-app)
+    - [Table of Contents](#table-of-contents)
+- [Description](#description)
+  - [Profiles and Jobs](#profiles-and-jobs)
+  - [Points](#points)
+    - [Momentum](#momentum)
+    - [Resiliency](#resiliency)
+    - [Social *(pending)*](#social-pending)
+- [Installation](#installation)
+  - [Requirements](#requirements)
+  - [Installing the App](#installing-the-app)
+  - [Running the App](#running-the-app)
+  - [Tests](#tests)
+- [Acknowledgements](#acknowledgements)
 
 # Description
 
@@ -104,7 +115,7 @@ To run tests after installing the application, run the following command from wi
 npm test
 ```
 
-## Acknowledgements
+# Acknowledgements
 
 Special thanks to [Camille](https://www.linkedin.com/in/cciancanelli/) for helping develop the idea for this application.
 
