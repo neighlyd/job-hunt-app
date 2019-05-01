@@ -5,7 +5,6 @@
   "proxy": "http://localhost:3000",
   "dependencies": {
     "axios": "^0.18.0",
-    "connected-react-router": "^6.4.0",
     "history": "^4.9.0",
     "is-empty": "^1.2.0",
     "jwt-decode": "^2.2.0",

@@ -1,9 +1,10 @@
 import React from 'react'
 
-
 export const LoadingPage = () => (
-    <div>
-        <p>Loading...</p>
+    <div style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <div>
+            <p>Loading...</p>
+        </div>
     </div>
 )
 

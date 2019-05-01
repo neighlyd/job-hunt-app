@@ -17,10 +17,19 @@ const authRequest = () => ({
 
 export const setUser = (user) => {
     return dispatch => {
-        return new Promise ((resolve) => {
+        dispatch(authRequest())
+        if (user) {
+            axios
+                .get('/users/me')
+                    .then(res => {
+                        dispatch(setCurrentUser(res.data))
+                    })
+                    .catch(err => {
+                        dispatch(getErrors(err.message))
+                    })
+        } else {
             dispatch(setCurrentUser(user))
-            return resolve()
-        })
+        }
     }
 } 
 
@@ -32,7 +41,7 @@ export const login = ({
         dispatch(authRequest())
         
         axios
-            .post('users/login', {
+            .post('/users/login', {
                 email,
                 password
             })
@@ -48,11 +57,11 @@ export const login = ({
     }
 }
 
-export const logout = (token) => {
+export const logout = () => {
     return dispatch => {
         dispatch(authRequest())
         axios
-            .post('users/logout')
+            .post('/users/logout')
             .then(res => {
                 localStorage.removeItem('token')
                 setAuthToken(false)

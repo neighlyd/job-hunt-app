@@ -1,0 +1,66 @@
+.button {
+    background: $light-green;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    display: inline-block;
+    font-weight: 300;
+    font-size: $font-size-large;
+    line-height: 1;
+    padding: $s-size;
+    text-decoration: none;
+    min-width: 125px;
+}
+
+.button:hover {
+    background: $green;
+    -webkit-box-shadow: 0px 0px 2px 1px $green;
+    -moz-box-shadow: 0px 0px 2px 1px $green;
+    box-shadow: 0px 0px 2px 1px $green;
+}
+
+.button__warning {
+    background: $orange;
+    
+}
+
+.button__warning:hover {
+    background: $dark-red;
+}
+
+.button__link {
+    background: none;
+}
+
+.button__link:hover {
+    background: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.button__archive {
+    background: none;
+    -webkit-box-shadow:inset 0px 0px 0px 2px $purple;
+    -moz-box-shadow:inset 0px 0px 0px 2px $purple;
+    box-shadow:inset 0px 0px 0px 2px $purple;
+    color: $purple;
+}
+
+.button__archive:hover {
+    background: none;
+    -webkit-box-shadow:inset 0px 0px 0px 2px $purple, 0px 0px 2px 1px $purple;
+    -moz-box-shadow:inset 0px 0px 0px 2px $purple, 0px 0px 2px 1px $purple;
+    box-shadow:inset 0px 0px 0px 2px $purple, 0px 0px 2px 1px $purple;
+}
+
+.button__archive__true {
+    background: linear-gradient(to top right, $light-purple, $purple);
+}
+
+.button__archive__true:hover {
+    @extend .button__archive__true;
+    -webkit-box-shadow: 0px 0px 2px 1px $purple;
+    -moz-box-shadow: 0px 0px 2px 1px $purple;
+    box-shadow: 0px 0px 2px 1px $purple;
+}

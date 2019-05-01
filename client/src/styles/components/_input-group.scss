@@ -1,0 +1,23 @@
+// 1. add selectors
+// 2. setup flexbox with space below the group
+// 3. Setup right margin for the individual items
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $m-size;
+        
+    @media (min-width: $desktop-breakpoint) {
+        flex-direction: row;
+        margin-bottom: $l-size;
+    }
+}
+
+.input-group__item {
+    margin-bottom: $s-size;
+
+    @media (min-width: $desktop-breakpoint) {
+        margin: 0 $s-size 0;
+    }
+}
+

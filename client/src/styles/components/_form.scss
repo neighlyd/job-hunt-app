@@ -1,0 +1,22 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    > * {
+        margin-bottom: $m-size;
+    }
+}
+
+.form__error {
+    border: 1px solid $orange;
+    border-radius: 3px;
+    color: $orange;
+    font-style: italic;
+    margin: 0 0 $m-size 0;
+    text-align: center;
+    padding: 3px 3px;
+}
+
+.form__button-well {
+    display: flex;
+    justify-content: space-between;
+}

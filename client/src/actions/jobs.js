@@ -92,7 +92,7 @@ export const editJob = ({
     return dispatch => {
         dispatch(jobsLoading())
         return axios
-            .patch(`jobs/${id}`, updates)
+            .patch(`/jobs/${id}`, updates)
             .then(res => {
                 dispatch(editJobSuccess(res.data.job._id, res.data.job))
             })

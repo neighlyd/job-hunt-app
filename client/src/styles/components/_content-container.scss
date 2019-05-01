@@ -1,0 +1,20 @@
+.container {
+    margin: 0 auto;
+    max-width: 80rem;
+    padding: 0 $m-size;
+}
+
+.container__content {
+    color: $grey;
+}
+
+.container__content__link {
+    @extend .container__content;
+    text-decoration: none;
+}
+
+.content-body {
+    display: flex;
+    flex: row;
+    margin-left: $s-size;
+}

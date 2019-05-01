@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { login } from '../actions/auth'
-import { push } from 'connected-react-router'
 
 export class LoginPage extends React.Component{
     constructor(props) {
@@ -12,41 +11,62 @@ export class LoginPage extends React.Component{
         }
     }
 
-    onEmailChange = (e) => {
-        const email = e.target.value
-        this.setState(() => ({email}))
-    }
-
-    onPasswordChange = (e) => {
-        const password = e.target.value
-        this.setState(() => ({password}))
+    onChange = (e) => {
+        const value = e.target.value
+        const name = e.target.name
+        this.setState(() => ({
+            [name]: value
+        }))
     }
     
     onSubmit = (e) => {
-        e.preventDefault()
         const email = this.state.email
         const password = this.state.password
         const creds = { email, password }
         this.props.startLogin(creds)
-        this.props.push('/')
+        this.props.history.push('/')
     }
     
     render(){
         return (
-            <div>
-                <form>
-                    <input type='text' ref='email' className='form-control' placeholder='Email' onChange={this.onEmailChange}/>
-                    <input type='password' ref='password' className='form-control' placeholder='Password' onChange={this.onPasswordChange}/>
-                    <button onClick={this.onSubmit}>Login</button>
-                </form>
+            <div className='container'>
+                <h1 className='page-header__title'>Sign in</h1>
+                <form className='form'>
+                    <label htmlFor='email'>
+                        Email
+                    </label>
+                    <input
+                        label="Type your email"
+                        icon="envelope"
+                        type="email"
+                        name="email"
+                        className='text-input'
+                        error="wrong"
+                        success="right"
+                        onChange={this.onChange}
+                    />
+                    <label htmlFor='password'>
+                        Password
+                    </label>
+                    <input
+                        label="Type your password"
+                        icon="lock"
+                        type="password"
+                        name="password"
+                        className='text-input'
+                        onChange={this.onChange}
+                    />
+                    <div className='form__button-well'>
+                        <button className='button' onClick={this.onSubmit}>Login</button>
+                    </div>
+                </form>      
             </div>
         )
     }
 } 
 
 const mapDispatchToProps = (dispatch) => ({
-    startLogin: (creds) => dispatch(login(creds)),
-    push: () => dispatch(push('/'))
+    startLogin: (creds) => dispatch(login(creds))
 })
 
 export default connect(null, mapDispatchToProps)(LoginPage)

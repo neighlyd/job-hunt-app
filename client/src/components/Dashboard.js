@@ -1,10 +1,11 @@
 import React from 'react'
+
 import JobListSummary from './JobListSummary'
 import JobList from './JobList'
+import Scores from './Scores'
 
 const Dashboard = () => (
     <div>
-        <h1>Dashboard</h1>
         <JobListSummary/>
         <JobList/>
     </div>

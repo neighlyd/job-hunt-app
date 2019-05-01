@@ -4,8 +4,17 @@ import { SingleDatePicker } from 'react-dates'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 
-const APPLICATION_STAGES = ['Application', 'Recruiter', 'Phone Screen', 'Web Interview', 'Onsite Interview', 'Offer', 'Accepted']
-const defaultOption = APPLICATION_STAGES[0]
+
+const APPLICATION_STAGES = [
+    'Application', 
+    'Recruiter', 
+    'Phone Screen', 
+    'Web Interview', 
+    'Onsite Interview', 
+    'Offer', 
+    'Accepted'
+]
+
 
 export default class JobItemForm extends React.Component {
     constructor(props) {
@@ -23,24 +32,17 @@ export default class JobItemForm extends React.Component {
         this.APPLICATION_STAGES = APPLICATION_STAGES
     }
 
-    onTitleChange = (e) => {
-        const title = e.target.value
-        this.setState(() => ({ title }))
-    }
-
-    onCompanyChange = (e) => {
-        const company = e.target.value
-        this.setState(() => ({company}))
+    handleChange = (e) => {
+        const value = e.target.value
+        const name = e.target.name
+        this.setState(() => ({ 
+            [name]: value 
+        }))
     }
 
     onNotesChange = (e) => {
         const notes = e.target.value
         this.setState(() => ({notes}))
-    }
-    
-    onStageChange = (e) => {
-        const stage = e.target.value
-        this.setState(() => ({stage}))
     }
     
     onDateChange = (appliedAt) => {
@@ -50,10 +52,11 @@ export default class JobItemForm extends React.Component {
     }
 
     onArchiveChange = () => {
+        console.log('bloops')
         this.setState({archived: !this.state.archived})
     }
 
-    onStageChange = (e) => {
+    handleStageChange = (e) => {
         const stage = e.value
         this.setState(() => ({stage}))
     }
@@ -83,35 +86,44 @@ export default class JobItemForm extends React.Component {
 
     render() {
         return (
-            <form className="form" onSubmit={this.onSubmit} >
-                {this.state.error && <p className="form__error">{this.state.error}</p>}
-                
+            <form className='form' onSubmit={(e) => e.preventDefault()}>
+            {this.state.error && <span className='form__error'>{this.state.error}</span>}
+                <label htmlFor='title'>
+                    Job Title
+                </label>
                 <input
-                    name="Archived"
-                    type="checkbox"
-                    defaultChecked={this.state.archived} 
-                    onChange={this.state.onArchiveChange}
-                />
-                <input
-                    type="text"
-                    placeholder="Job Title"
-                    className="text-input"
+                    type='text'
+                    placeholder='Job Title'
+                    className='text-input'
+                    name='title'
                     autoFocus
                     value={this.state.title}
-                    onChange={this.onTitleChange}
+                    onChange={this.handleChange}
                 />
-                
+                <label htmlFor='company'>
+                    Company Name
+                </label>
                 <input
                     type="company"
                     placeholder="Company Name"
                     className="text-input"
-                    autoFocus
+                    name='company'
                     value={this.state.company}
-                    onChange={this.onCompanyChange}
-                />             
-                
-                <Dropdown options={APPLICATION_STAGES} onChange={this.onStageChange} value={this.state.stage} placeholder='Select a Stage'/>
-                
+                    onChange={this.handleChange}
+                />       
+                <label htmlFor='stage'>
+                    Stage
+                </label>
+                <Dropdown 
+                    options={APPLICATION_STAGES} 
+                    name='stage' 
+                    placeholder='Select a Stage'
+                    onChange={this.handleStageChange} 
+                    value={this.state.stage}
+                />     
+                <label htmlFor='appliedAt-Date'>
+                    Date Applied 
+                </label>
                 <SingleDatePicker
                     date={this.state.appliedAt}
                     onDateChange={this.onDateChange}
@@ -122,18 +134,29 @@ export default class JobItemForm extends React.Component {
                     isOutsideRange={(() => false)}
                     hideKeyboardShortcutsPanel={true}
                 />
-
-
+                <label htmlFor='notes'>
+                    Notes
+                </label>
                 <textarea
-                    placeholder="Notes to track your job application process (optional)"
-                    className="textarea"
-                    value={this.state.note}
-                    onChange={this.onNoteChange}
+                    placeholder='Notes to track your job application process (optional)'
+                    className='textarea'
+                    name='notes'
+                    rows='5'
+                    value={this.state.notes}
+                    onChange={this.handleChange}
                 >
                 </textarea>
-
-                <div>
-                    <button className="button">{this.props.buttonLabel} Job</button>
+                <div className='form__button-well'>
+                    <button className='button' onClick={this.onSubmit}>{this.props.buttonLabel}</button>
+                    { console.log(this.props)}
+                    { this.props.onDelete && 
+                        <button className='button button__warning' onClick={this.props.onDelete}>Delete</button>
+                    }
+                    { this.state.archived  ? (
+                        <button className='button button__archive__true' onClick={this.onArchiveChange}>Archived</button> 
+                    ) : (
+                        <button className='button button__archive' onClick={this.onArchiveChange}>Archive</button>
+                    )}
                 </div>
             </form>
         )

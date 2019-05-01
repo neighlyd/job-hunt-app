@@ -1,19 +1,38 @@
 import React from 'react'
-import { push } from 'connected-react-router'
-import { connect } from 'react-redux'
 import moment from 'moment'
+import { Link} from 'react-router-dom'
 
 
-export const JobListItem = ({ changePage, title, company, appliedAt }) => (
-    <div onClick={changePage}>
-        <p className="list-item__title">{title}</p>
-        <span className="list-item__sub-title">{company}</span>
-        <p>{ moment(appliedAt).format('MMM Do, YYYY') }</p>
-    </div>
-)
+const JobListItem = (props) => {
 
-const mapDispatchToProps = (dispatch, props) => ({
-    changePage: () => dispatch(push(`/edit/${props._id}`))
-})
+    const archivedToClassName = {
+        true: 'list-item list-item__archived',
+        false: 'list-item'
+    }
 
-export default connect(null,mapDispatchToProps)(JobListItem)
+    return (
+        <div className={archivedToClassName[props.archived]}>
+            <Link to={`/edit/${props._id}`} className='list-item__body'>
+                <div>
+                    <h3 className='list-item__title'>{props.title}</h3>
+                    <span className='list-item__sub-title'>{ moment(props.appliedAt).format('MMM Do, YYYY') }</span>
+                </div>
+                    { props.archived && 
+                        <div className='list-item__archived-label'>
+                            archived
+                        </div>
+                    }
+                <h3 className='list-item__data'>
+                    {props.company}
+                </h3>
+            </Link>
+            { props.notes && 
+                <div className='list-item__body list-item__data'>
+                    {props.notes}
+                </div>
+            }
+        </div>
+    )
+}
+
+export default JobListItem
