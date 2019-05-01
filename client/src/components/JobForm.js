@@ -148,7 +148,6 @@ export default class JobItemForm extends React.Component {
                 </textarea>
                 <div className='form__button-well'>
                     <button className='button' onClick={this.onSubmit}>{this.props.buttonLabel}</button>
-                    { console.log(this.props)}
                     { this.props.onDelete && 
                         <button className='button button__warning' onClick={this.props.onDelete}>Delete</button>
                     }
