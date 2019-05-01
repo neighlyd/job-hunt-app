@@ -2,7 +2,6 @@ import React from 'react'
 
 import JobListSummary from './JobListSummary'
 import JobList from './JobList'
-import Scores from './Scores'
 
 const Dashboard = () => (
     <div>
