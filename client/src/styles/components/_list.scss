@@ -1,3 +1,8 @@
+.list-container {
+    @extend .container;
+    margin-top: $m-size;
+}
+
 .list-body {
     margin-bottom: $m-size;
     
@@ -31,9 +36,8 @@
     flex-direction: column;
     text-decoration: none;
     color: $grey;
-
     @media (min-width: $desktop-breakpoint) {
-        align-items: center;
+        align-items: flex-start;
         flex-direction: row;
         justify-content: space-between;
         padding: $m-size;
@@ -54,6 +58,16 @@
     @media (min-width: $desktop-breakpoint) {
         margin: 0;
         padding-left: $s-size;
+    }
+}
+
+@media (max-width: $desktop-breakpoint) {
+    .list-item__order:first-child {
+        order: 2;
+    }
+
+    .list-item__order:last-child {
+        order: 1;
     }
 }
 

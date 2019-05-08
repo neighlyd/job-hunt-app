@@ -1,20 +1,28 @@
 .form {
     display: flex;
     flex-direction: column;
-    > * {
-        margin-bottom: $m-size;
-    }
+    margin-top: $s-size;
+}
+
+.form__group {
+    @extend .form;
+    margin-bottom: $s-size;
+}
+
+label {
+    margin: 0 0 $s-size 0;
 }
 
 .form__error {
     color: $orange;
     font-style: italic;
-    margin: 0 0 $m-size 0;
     text-align: center;
-    padding: 3px 3px;
 }
 
 .form__button-well {
     display: flex;
     justify-content: space-between;
+    @media(max-width: $desktop-breakpoint){
+        flex-direction: column;
+    }
 }

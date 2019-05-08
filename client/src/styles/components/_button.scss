@@ -19,6 +19,13 @@
     box-shadow: 0px 0px 2px 1px $green;
 }
 
+.button__form {
+    @extend .button;
+    @media(max-width: $desktop-breakpoint){
+        margin-bottom: $s-size;
+    }
+}
+
 .button__warning {
     background: $orange;
     

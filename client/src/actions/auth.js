@@ -5,7 +5,8 @@ const axios = require('axios')
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const AUTH_REQUEST = 'AUTH_REQUEST'
-export const END_AUTH_REQUEST = 'END_AUTH_REQUEST'
+export const AUTH_ERROR = 'AUTH_ERROR'
+export const CLEAR_AUTH_ERROR = 'CLEAR_ERROR'
 
 export const setCurrentUser = user => ({
     type: SET_CURRENT_USER,
@@ -16,13 +17,17 @@ const authRequest = () => ({
     type: AUTH_REQUEST
 })
 
-const endAuthRequest = () => ({
-    type: END_AUTH_REQUEST
+const authError = error => ({
+    type: AUTH_ERROR,
+    payload: error
+})
+
+export const clearAuthError = () => ({
+    type: CLEAR_AUTH_ERROR
 })
 
 export const setUser = (user) => {
     return dispatch => {
-        dispatch(getErrors())
         dispatch(authRequest())
         
         if (user) {
@@ -33,8 +38,7 @@ export const setUser = (user) => {
                         dispatch(getErrors())
                     })
                     .catch(err => {
-                        dispatch(endAuthRequest())
-                        dispatch(getErrors(err.response.data.error))
+                        dispatch(authError(err.response.data.error))
                     })
         } else {
             dispatch(setCurrentUser(user))
@@ -48,7 +52,6 @@ export const login = ({
     rememberMe
 }) => {
     return dispatch => {
-        dispatch(getErrors())
         dispatch(authRequest())
         
         axios
@@ -65,8 +68,7 @@ export const login = ({
                 dispatch(getJobs())
             })
             .catch(err => {
-                dispatch(endAuthRequest())
-                dispatch(getErrors(err.response.data.error))
+                dispatch(authError(err.response.data.error))
             })
     }
 }
@@ -96,15 +98,13 @@ export const register = ({
                 dispatch(getJobs())
             })
             .catch(err => {
-                dispatch(endAuthRequest())
-                dispatch(getErrors(err.response.data.error))
+                dispatch(authError(err.response.data.error))
             })
     }
 }
 
 export const logout = () => {
     return dispatch => {
-        dispatch(getErrors())
         dispatch(authRequest())
         localStorage.removeItem('token')
         setAuthToken(false)

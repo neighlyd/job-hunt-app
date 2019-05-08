@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { register } from '../actions/auth'
+import { register, clearAuthError } from '../actions/auth'
 
 export class RegisterPage extends React.Component{
     constructor(props) {
@@ -26,6 +26,10 @@ export class RegisterPage extends React.Component{
             formValid: false,
             showErrors: false
         }
+    }
+
+    componentWillUnmount = () => {
+        this.props.clearAuthError()
     }
 
     validateField = (fieldName, value) => {
@@ -182,9 +186,9 @@ export class RegisterPage extends React.Component{
                         <input type='checkbox' onChange={this.onCheck}/>
                         <span>Remember Me</span>
                     </label>
-                    {this.props.errors && (
+                    {this.props.authError && (
                         <div className="form__error">
-                            {this.props.errors}
+                            {this.props.authError}
                         </div>
                     )}
                     <div className='form__button-well'>
@@ -197,11 +201,12 @@ export class RegisterPage extends React.Component{
 } 
 
 const mapStatetoProps = (state) => ({
-    errors: state.errors
+    authError: state.auth.error
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    startRegister: (creds) => dispatch(register(creds))
+    startRegister: (creds) => dispatch(register(creds)),
+    clearAuthError: () => dispatch(clearAuthError())
 })
 
 export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(RegisterPage))

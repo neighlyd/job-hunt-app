@@ -88,73 +88,83 @@ export default class JobItemForm extends React.Component {
         return (
             <form className='form' onSubmit={(e) => e.preventDefault()}>
             {this.state.error && <span className='form__error'>{this.state.error}</span>}
-                <label htmlFor='title'>
-                    Job Title
-                </label>
-                <input
-                    type='text'
-                    placeholder='Job Title'
-                    className='text-input'
-                    name='title'
-                    autoFocus
-                    value={this.state.title}
-                    onChange={this.handleChange}
-                />
-                <label htmlFor='company'>
-                    Company Name
-                </label>
-                <input
-                    type="company"
-                    placeholder="Company Name"
-                    className="text-input"
-                    name='company'
-                    value={this.state.company}
-                    onChange={this.handleChange}
-                />       
-                <label htmlFor='stage'>
-                    Stage
-                </label>
-                <Dropdown 
-                    options={APPLICATION_STAGES} 
-                    name='stage' 
-                    placeholder='Select a Stage'
-                    onChange={this.handleStageChange} 
-                    value={this.state.stage}
-                />     
-                <label htmlFor='appliedAt-Date'>
-                    Date Applied 
-                </label>
-                <SingleDatePicker
-                    date={this.state.appliedAt}
-                    onDateChange={this.onDateChange}
-                    focused={this.state.calendarFocused}
-                    onFocusChange={this.onFocusChange}
-                    id="appliedAt-Date"
-                    numberOfMonths={1}
-                    isOutsideRange={(() => false)}
-                    hideKeyboardShortcutsPanel={true}
-                />
-                <label htmlFor='notes'>
-                    Notes
-                </label>
-                <textarea
-                    placeholder='Notes to track your job application process (optional)'
-                    className='textarea'
-                    name='notes'
-                    rows='5'
-                    value={this.state.notes}
-                    onChange={this.handleChange}
-                >
-                </textarea>
+                <div className='form__group'>
+                    <label htmlFor='title'>
+                        Job Title
+                    </label>
+                    <input
+                        type='text'
+                        placeholder='Job Title'
+                        className='text-input'
+                        name='title'
+                        autoFocus
+                        value={this.state.title}
+                        onChange={this.handleChange}
+                    />
+                </div>
+                <div className='form__group'>
+                    <label htmlFor='company'>
+                        Company Name
+                    </label>
+                    <input
+                        type="company"
+                        placeholder="Company Name"
+                        className="text-input"
+                        name='company'
+                        value={this.state.company}
+                        onChange={this.handleChange}
+                    />       
+                </div>
+                <div className='form__group'>
+                    <label htmlFor='stage'>
+                        Stage
+                    </label>
+                    <Dropdown 
+                        options={APPLICATION_STAGES} 
+                        name='stage' 
+                        placeholder='Select a Stage'
+                        onChange={this.handleStageChange} 
+                        value={this.state.stage}
+                    />     
+                </div>
+                <div className='form__group'>
+                    <label htmlFor='appliedAt-Date'>
+                        Date Applied 
+                    </label>
+                    <SingleDatePicker
+                        date={this.state.appliedAt}
+                        onDateChange={this.onDateChange}
+                        focused={this.state.calendarFocused}
+                        onFocusChange={this.onFocusChange}
+                        id="appliedAt-Date"
+                        numberOfMonths={1}
+                        isOutsideRange={(() => false)}
+                        hideKeyboardShortcutsPanel={true}
+                    />
+                </div>
+                <div className='form__group'>
+                    <label htmlFor='notes'>
+                        Notes
+                    </label>
+                    <textarea
+                        placeholder='Notes to track your job application process (optional)'
+                        className='textarea'
+                        name='notes'
+                        rows='5'
+                        value={this.state.notes}
+                        onChange={this.handleChange}
+                    >
+                    </textarea>
+                </div>
                 <div className='form__button-well'>
-                    <button className='button' onClick={this.onSubmit}>{this.props.buttonLabel}</button>
+                    <button className='button__form' onClick={this.onSubmit}>{this.props.buttonLabel}</button>
                     { this.props.onDelete && 
-                        <button className='button button__warning' onClick={this.props.onDelete}>Delete</button>
+                        <button className='button__form button__warning' onClick={this.props.onDelete}>Delete</button>
                     }
                     { this.state.archived  ? (
-                        <button className='button button__archive__true' onClick={this.onArchiveChange}>Archived</button> 
+                        <button className='button__form button__archive__true' onClick={this.onArchiveChange}>Archived</button> 
                     ) : (
-                        <button className='button button__archive' onClick={this.onArchiveChange}>Archive</button>
+                        <button className='button__form button__archive' onClick={this.onArchiveChange}>Archive</button>
                     )}
                 </div>
             </form>

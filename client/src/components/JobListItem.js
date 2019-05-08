@@ -12,25 +12,25 @@ const JobListItem = (props) => {
 
     return (
         <div className={archivedToClassName[props.archived]}>
-            <Link to={`/edit/${props._id}`} className='list-item__body'>
-                <div>
-                    <h3 className='list-item__title'>{props.title}</h3>
-                    <span className='list-item__sub-title'>{ moment(props.appliedAt).format('MMM Do, YYYY') }</span>
+            <Link to={`/edit/${props._id}`} className='link__hidden'>
+                <div className='list-item__body'>
+                    <div className='list-item__order'>
+                        <h3 className='list-item__title'>{props.title}</h3>
+                        <span className='list-item__sub-title'>{ moment(props.appliedAt).format('MMM Do, YYYY') }</span>
+                        { props.archived && (
+                            <span className='list-item__sub-title'><br/><i>(Archived)</i></span>
+                        )}
+                    </div>
+                    <h3 className='list-item__order'>
+                        {props.company}
+                    </h3>
                 </div>
-                    { props.archived && 
-                        <div className='list-item__archived-label'>
-                            archived
-                        </div>
-                    }
-                <h3 className='list-item__data'>
-                    {props.company}
-                </h3>
-            </Link>
-            { props.notes && 
-                <div className='list-item__body list-item__data'>
+                { props.notes && 
+                    <div className='list-item__body list-item__data'>
                     {props.notes}
-                </div>
-            }
+                    </div>
+                }
+            </Link>
         </div>
     )
 }

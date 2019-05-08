@@ -7,10 +7,9 @@ import JobListItem from './JobListItem'
 export const JobList = (props) => {
 
     return (
-        <div className='container'>
+        <div className='list-container'>
             <div className='list-header'>
-                <div className='show-for-mobile'>Jobs</div>
-                <div className='show-for-desktop'>Job</div>
+                <h3>Jobs</h3>
             </div>
             <div className='list-body'>
                 {props.jobs.length === 0 ? (
