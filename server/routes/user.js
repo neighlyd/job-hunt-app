@@ -117,33 +117,8 @@ router.post('/users/login', async (req, res) => {
         const token = await user.generateAuthToken();
         res.send({token, user});
     } catch (e) {
-        res.status(400).send({errors: {non_field_errors: ["Unable to login with provided credentials."]}});
+        res.status(400).send({error: "Unable to login with provided credentials."});
     }
 });
-
-router.post('/users/logout', authenticate, async (req, res) => {
-    try {
-        req.user.tokens = req.user.tokens.filter((token) => {
-            return token.token !== req.token
-        })
-
-        await req.user.save()
-
-        res.sendStatus(200)
-    } catch (e) {
-        res.sendStatus(500)
-    }
-})
-
-router.post('/users/logoutAll', authenticate, async (req, res) => {
-    try{
-        req.user.tokens = []
-        await req.user.save()
-
-        res.sendStatus(200)
-    } catch (e) {
-        res.sendStatus(500)
-    }
-})
 
 module.exports = router

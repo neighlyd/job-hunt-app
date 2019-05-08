@@ -1,6 +1,6 @@
-import GET_ERRORS from '../actions/errors'
+import { GET_ERRORS } from '../actions/errors'
 
-const initialState = {}
+const initialState = ''
 
 export default (state = initialState, action) => {
     switch (action.type){

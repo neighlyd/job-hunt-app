@@ -1,5 +1,5 @@
 const isEmpty = require('is-empty')
-const { AUTH_REQUEST, SET_CURRENT_USER } = require('../actions/auth')
+const { AUTH_REQUEST, SET_CURRENT_USER, END_AUTH_REQUEST } = require('../actions/auth')
 
 const initialState = {
     isLoading: false,
@@ -13,6 +13,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: true
+            }
+        case END_AUTH_REQUEST:
+            return {
+                ...state,
+                isLoading: false
             }
         case SET_CURRENT_USER:
             return {

@@ -73,12 +73,6 @@ const UserSchema = new mongoose.Schema({
             message: val => `${val.value} is not a valid URL.`
         }
     },
-    tokens: [{
-        token: {
-            type: String,
-            required: true
-        }
-    }],
     admin: {
         type: Boolean,
         default: false
@@ -93,7 +87,6 @@ UserSchema.methods.toJSON = function() {
 
     delete userObject.admin
     delete userObject.password
-    delete userObject.tokens
     delete userObject.zip_code
 
     return userObject
@@ -109,10 +102,6 @@ UserSchema.virtual('jobs', {
 UserSchema.methods.generateAuthToken = async function() {
     let user = this
     let token = jwt.sign({_id: user._id.toString()}, process.env.JWT_SECRET, {expiresIn: '2 weeks'}).toString()
-
-    user.tokens = user.tokens.concat([{token}])
-    await user.save()
-
     return token
 };
 

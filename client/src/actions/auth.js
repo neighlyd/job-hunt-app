@@ -5,6 +5,7 @@ const axios = require('axios')
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const AUTH_REQUEST = 'AUTH_REQUEST'
+export const END_AUTH_REQUEST = 'END_AUTH_REQUEST'
 
 export const setCurrentUser = user => ({
     type: SET_CURRENT_USER,
@@ -15,17 +16,25 @@ const authRequest = () => ({
     type: AUTH_REQUEST
 })
 
+const endAuthRequest = () => ({
+    type: END_AUTH_REQUEST
+})
+
 export const setUser = (user) => {
     return dispatch => {
+        dispatch(getErrors())
         dispatch(authRequest())
+        
         if (user) {
             axios
                 .get('/users/me')
                     .then(res => {
                         dispatch(setCurrentUser(res.data))
+                        dispatch(getErrors())
                     })
                     .catch(err => {
-                        dispatch(getErrors(err.message))
+                        dispatch(endAuthRequest())
+                        dispatch(getErrors(err.response.data.error))
                     })
         } else {
             dispatch(setCurrentUser(user))
@@ -35,9 +44,11 @@ export const setUser = (user) => {
 
 export const login = ({
     email,
-    password
+    password,
+    rememberMe
 }) => {
     return dispatch => {
+        dispatch(getErrors())
         dispatch(authRequest())
         
         axios
@@ -46,31 +57,58 @@ export const login = ({
                 password
             })
             .then(res => {
-                localStorage.setItem('token', res.data.token)
+                if (rememberMe) {
+                    localStorage.setItem('token', res.data.token)
+                }
                 setAuthToken(res.data.token)
                 dispatch(setCurrentUser(res.data))
                 dispatch(getJobs())
             })
             .catch(err => {
-                dispatch(getErrors(err.message))
+                dispatch(endAuthRequest())
+                dispatch(getErrors(err.response.data.error))
+            })
+    }
+}
+
+export const register = ({
+    name,
+    email,
+    password,
+    rememberMe
+}) => {
+    return dispatch => {
+        dispatch(getErrors())
+        dispatch(authRequest())
+
+        axios
+            .post('/users/', {
+                name,
+                email,
+                password
+            })
+            .then(res => {
+                if(rememberMe){
+                    localStorage.setItem('token', res.data.token)
+                }
+                setAuthToken(res.data.token)
+                dispatch(setCurrentUser(res.data))
+                dispatch(getJobs())
+            })
+            .catch(err => {
+                dispatch(endAuthRequest())
+                dispatch(getErrors(err.response.data.error))
             })
     }
 }
 
 export const logout = () => {
     return dispatch => {
+        dispatch(getErrors())
         dispatch(authRequest())
-        axios
-            .post('/users/logout')
-            .then(res => {
-                localStorage.removeItem('token')
-                setAuthToken(false)
-                dispatch(setCurrentUser({}))
-                dispatch(clearJobs())
-            })
-            .catch(err => {
-                dispatch(getErrors(err))
-            })
-
+        localStorage.removeItem('token')
+        setAuthToken(false)
+        dispatch(setCurrentUser({}))
+        dispatch(clearJobs())
     }
 }

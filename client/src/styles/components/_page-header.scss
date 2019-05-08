@@ -22,6 +22,8 @@
 
 .page-header__title {
     font-weight: 300;
+    padding-left: $s-size;
+    padding-right: $s-size;
     margin: 0;
     span {
         font-weight: bold;

@@ -6,6 +6,7 @@ import AddJobPage from '../components/AddJobPage'
 import Dashboard from '../components/Dashboard'
 import EditJobItem from '../components/EditJobItem'
 import LoginPage from '../components/LoginPage'
+import RegisterPage from '../components/RegisterPage'
 import NotFoundPage from '../components/NotFoundPage'
 import PrivateRoute from './PrivateRoute'
 import PublicRoute from './PublicRoute'
@@ -17,7 +18,8 @@ const AppRouter = () => (
     <Router history={ history }>
             <Header />
             <Switch>
-                <PublicRoute exact path='/' component={LoginPage}/>
+                <PublicRoute exact path='/' component={LoginPage} />
+                <PublicRoute exact path='/register' component={RegisterPage} />
                 <PrivateRoute exact path='/dashboard' component={Dashboard} />
                 <PrivateRoute path='/create' component={AddJobPage}/>
                 <PrivateRoute path="/edit/:id" component={EditJobItem} />

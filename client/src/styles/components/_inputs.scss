@@ -9,8 +9,13 @@
 
 .text-input:focus {
     outline: none;
-    border-bottom: 1px solid $purple;
-    transition: border-bottom 0.3s ease-in-out;
+    border: 1px solid $purple;
+    transition: border-bottom 0.4s ease-in-out;
+}
+
+.text-input__error {
+    @extend .text-input;
+    border: 1px solid $orange;
 }
 
 .select {

@@ -39,6 +39,11 @@
     box-shadow: none;
 }
 
+.button__link__dark {
+    @extend .button__link;
+    color: black;
+}
+
 .button__archive {
     background: none;
     -webkit-box-shadow:inset 0px 0px 0px 2px $purple;

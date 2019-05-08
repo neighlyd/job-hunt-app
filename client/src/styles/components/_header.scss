@@ -2,6 +2,11 @@
     background: $light-grey;
 }
 
+.header__login {
+    background: $off-white;
+    margin-top: $s-size;
+}
+
 .header__content {
     align-items: center;
     display: flex;
@@ -11,6 +16,7 @@
 
 .header__link {
     color: $off-white;
+    padding-left: $s-size;
     text-decoration: none;
     h1 {
         margin: 0;
