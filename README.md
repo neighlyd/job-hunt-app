@@ -3,7 +3,7 @@
 
 Job hunting sucks. It is emotionally and physically draining. The process is littered with defeats both large and small, from having your application summarily ignored to dealing with the psychological isolation of spending all day alone. The Job Hunting App is intended to help alleviate these feelings, boost confidence, and motivate you to get the job that you deserve.
 
-*The Job Hunting Application is not currently live. This space will be updated with a URL once it is launched.*
+The Job Hunting App can be found at https://neighly-job-hunt.herokuapp.com
 
 ### Table of Contents
 - [Job Hunting App](#job-hunting-app)
