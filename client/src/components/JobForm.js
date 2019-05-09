@@ -3,6 +3,7 @@ import moment from 'moment'
 import { SingleDatePicker } from 'react-dates'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
+import DeleteJobModal  from './DeleteJobModal';
 
 
 const APPLICATION_STAGES = [
@@ -27,9 +28,12 @@ export default class JobItemForm extends React.Component {
             appliedAt: props.job ? moment(props.job.appliedAt) : moment(),
             archived: props.job ? props.job.archived : false,
             calendarFocused: false,
-            error: ''
+            error: '',
+            showModal: false
         }
         this.APPLICATION_STAGES = APPLICATION_STAGES
+        this.handleOpenModal = this.handleOpenModal.bind(this)
+        this.handleCloseModal = this.handleCloseModal.bind(this)
     }
 
     handleChange = (e) => {
@@ -81,6 +85,14 @@ export default class JobItemForm extends React.Component {
                 archived: this.state.archived
             })
         }
+    }
+
+    handleOpenModal () {
+        this.setState({ showModal: true })
+    }
+      
+    handleCloseModal () {
+        this.setState({ showModal: false })
     }
 
     render() {
@@ -158,7 +170,14 @@ export default class JobItemForm extends React.Component {
                 <div className='form__button-well'>
                     <button className='button__form' onClick={this.onSubmit}>{this.props.buttonLabel}</button>
                     { this.props.onDelete && 
-                        <button className='button__form button__warning' onClick={this.props.onDelete}>Delete</button>
+                        <div>
+                        <button className='button__form button__warning' onClick={this.handleOpenModal}>Delete</button>
+                        <DeleteJobModal
+                            showModal={this.state.showModal}
+                            handleCloseModal={this.handleCloseModal}
+                            deleteJob={this.props.onDelete}
+                        />
+                        </div>
                     }
                     { this.state.archived  ? (
                         <button className='button__form button__archive__true' onClick={this.onArchiveChange}>Archived</button> 

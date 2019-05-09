@@ -1,8 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import JobListFilterModal from './JobListFilterModal'
-import ResiliencyScore from './ResiliencyScore'
-import MomentumScore from './MomentumScore'
 
 export class JobListSummary extends React.Component {
 

@@ -12,7 +12,6 @@
     "node-sass": "^4.11.0",
     "numeral": "^2.0.6",
     "react": "^16.8.6",
-    "react-burger-menu": "^2.6.10",
     "react-dates": "^20.1.0",
     "react-dom": "^16.8.6",
     "react-dropdown": "^1.6.4",

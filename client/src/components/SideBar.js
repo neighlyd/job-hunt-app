@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Scores from './Scores'
 import MomentumScore from './MomentumScore'
 import ResiliencyScore from './ResiliencyScore'
 
