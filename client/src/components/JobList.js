@@ -3,13 +3,16 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import JobListItem from './JobListItem'
+import selectJobs from '../selectors/jobs'
 
 export const JobList = (props) => {
 
     return (
         <div className='list-container'>
             <div className='list-header'>
-                <h3>Jobs</h3>
+                <div className='show-for-mobile'>Jobs</div>
+                <div className='show-for-desktop'>Job Title</div>
+                <div className='show-for-desktop'>Company</div>
             </div>
             <div className='list-body'>
                 {props.jobs.length === 0 ? (
@@ -29,9 +32,10 @@ export const JobList = (props) => {
     )
 }
 
+// Only pass in the jobs we want to see, based on our current filters.
 const mapStateToProps = (state) => {
     return {
-        jobs: state.jobs.jobs
+        jobs: selectJobs(state.jobs.jobs, state.jobFilters)
     }
 }
 

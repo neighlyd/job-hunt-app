@@ -1,5 +1,4 @@
 import setAuthToken from '../api/setAuthToken'
-import getErrors from './errors'
 import { getJobs, clearJobs } from './jobs'
 const axios = require('axios')
 
@@ -35,7 +34,6 @@ export const setUser = (user) => {
                 .get('/users/me')
                     .then(res => {
                         dispatch(setCurrentUser(res.data))
-                        dispatch(getErrors())
                     })
                     .catch(err => {
                         dispatch(authError(err.response.data.error))
@@ -80,7 +78,6 @@ export const register = ({
     rememberMe
 }) => {
     return dispatch => {
-        dispatch(getErrors())
         dispatch(authRequest())
 
         axios

@@ -5,8 +5,8 @@ import JobList from './JobList'
 
 const Dashboard = () => (
     <div>
-        <JobListSummary/>
-        <JobList/>
+        <JobListSummary />
+        <JobList />
     </div>
 )
 

@@ -2,20 +2,29 @@
 // 2. setup flexbox with space below the group
 // 3. Setup right margin for the individual items
 
-.input-group {
+.filter-input-group {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     margin-bottom: $m-size;
-        
-    @media (min-width: $desktop-breakpoint) {
-        flex-direction: row;
-        margin-bottom: $l-size;
-    }
+    > * {
+        padding-bottom: $s-size;
+    }        
 }
 
-.input-group__item {
-    margin-bottom: $s-size;
+.filter-input-group__label {
+    color: $dark-grey;
+}
+.filter-input-group div {
+    flex-basis: 100%;
+}
 
+.filter-input-group__label {
+    margin-right: $s-size;
+}
+
+.filter-input-group__item {
+    margin-bottom: $s-size;
     @media (min-width: $desktop-breakpoint) {
         margin: 0 $s-size 0;
     }

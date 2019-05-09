@@ -52,7 +52,6 @@ export default class JobItemForm extends React.Component {
     }
 
     onArchiveChange = () => {
-        console.log('bloops')
         this.setState({archived: !this.state.archived})
     }
 

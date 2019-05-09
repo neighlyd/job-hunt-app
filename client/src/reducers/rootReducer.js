@@ -2,10 +2,10 @@ import { combineReducers } from 'redux'
 
 import jobs from './jobs'
 import auth from './auth'
-import errors from './errors'
+import jobFilters from './jobFilters'
 
 export default combineReducers ({
     jobs,
     auth,
-    errors
+    jobFilters
 })

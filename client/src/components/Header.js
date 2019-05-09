@@ -29,7 +29,7 @@ export class Header extends React.Component {
                 <div className='container'>
                     <div className='header__content'>
                         <Link to='/' className='header__link'>
-                                <h1>Job Hunt App</h1>
+                                <h1>Job Hunt</h1>
                         </Link>
                         { this.props.isAuth ? (
                             <button className='button button__link' onClick={ this.logout }>Logout</button>
