@@ -93,11 +93,12 @@ export const register = ({
                 password
             })
             .then(res => {
+                console.log(res.data)
                 if(rememberMe){
                     localStorage.setItem('token', res.data.token)
                 }
                 setAuthToken(res.data.token)
-                dispatch(setCurrentUser(res.data))
+                dispatch(setCurrentUser(res.data.user))
                 dispatch(getJobs())
             })
             .catch(err => {

@@ -86,6 +86,10 @@ export class RegisterPage extends React.Component{
         }, () => { this.validateField(name, value) })
     }
 
+    onCheck = (e) => {
+        this.setState({rememberMe: e.target.checked})
+    }
+
     onSubmit = (e) => {
         e.preventDefault()
         if (this.state.formValid){
