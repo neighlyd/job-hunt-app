@@ -1,6 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import JobListFilterModal from './JobListFilterModal'
+
+import filterJobs from '../selectors/jobs'
 
 export class JobListSummary extends React.Component {
 
@@ -25,7 +28,10 @@ export class JobListSummary extends React.Component {
         return (
             <div className='page-header'>
                 <div className='page-header__content'>
-                    <h1 className='page-header__title'>My Job List</h1>
+                    <div className='page-header__title'>
+                        <h1>My Job List</h1>
+                        <i>(Displaying: {this.props.displayed} out of {this.props.total} jobs)</i>
+                    </div>
                     <div className='page-header__actions'>
                         <button className='button' onClick={this.handleOpenModal}>
                             <i className="fas fa-filter"></i>
@@ -44,4 +50,13 @@ export class JobListSummary extends React.Component {
     }
 }
 
-export default withRouter(JobListSummary)
+const mapStateToProps = (state) => {
+    const displayed = filterJobs(state.jobs.jobs, state.jobFilters).length
+    const total = state.jobs.jobs.length
+    return {
+        displayed,
+        total
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(JobListSummary))

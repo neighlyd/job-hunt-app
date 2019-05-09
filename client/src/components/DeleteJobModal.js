@@ -13,8 +13,8 @@ export const DeleteJobModal = (props) => (
         <div>
             Click Delete to permanently delete this job.
             <div className='form__button-well'>
-            <button className='button__form  button__warning' onClick={props.deleteJob}>Delete</button>
             <button className='button__form' onClick={props.handleCloseModal}>Cancel</button>
+            <button className='button__form  button__warning' onClick={props.deleteJob}>Delete</button>
             </div>
         </div>
     </Modal>

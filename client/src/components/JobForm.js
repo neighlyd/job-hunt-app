@@ -170,14 +170,7 @@ export default class JobItemForm extends React.Component {
                 <div className='form__button-well'>
                     <button className='button__form' onClick={this.onSubmit}>{this.props.buttonLabel}</button>
                     { this.props.onDelete && 
-                        <div>
                         <button className='button__form button__warning' onClick={this.handleOpenModal}>Delete</button>
-                        <DeleteJobModal
-                            showModal={this.state.showModal}
-                            handleCloseModal={this.handleCloseModal}
-                            deleteJob={this.props.onDelete}
-                        />
-                        </div>
                     }
                     { this.state.archived  ? (
                         <button className='button__form button__archive__true' onClick={this.onArchiveChange}>Archived</button> 
@@ -185,6 +178,13 @@ export default class JobItemForm extends React.Component {
                         <button className='button__form button__archive' onClick={this.onArchiveChange}>Archive</button>
                     )}
                 </div>
+                { this.props.onDelete && 
+                    <DeleteJobModal
+                        showModal={this.state.showModal}
+                        handleCloseModal={this.handleCloseModal}
+                        deleteJob={this.props.onDelete}
+                    />
+                }
             </form>
         )
     }
