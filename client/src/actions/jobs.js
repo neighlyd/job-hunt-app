@@ -1,5 +1,7 @@
 import getErrors from './errors'
+import { updateScores } from './auth'
 const axios = require('axios')
+
 
 export const JOBS_LOADING = 'JOBS_LOADING'
 export const ADD_JOB_SUCCESS = 'ADD_JOB_SUCCESS'
@@ -62,6 +64,7 @@ export const addJob = (job) => {
             .post('/jobs', job)
             .then(res => {
                 dispatch(addJobSuccess(res.data))
+                dispatch(updateScores())
             })
             .catch(err => {
                 dispatch(getErrors(err.message))
@@ -95,6 +98,7 @@ export const editJob = ({
             .patch(`/jobs/${id}`, updates)
             .then(res => {
                 dispatch(editJobSuccess(res.data.job._id, res.data.job))
+                dispatch(updateScores())
             })
             .catch(err => {
                 dispatch(getErrors(err.message))

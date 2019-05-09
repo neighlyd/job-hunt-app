@@ -42,6 +42,16 @@ router.get('/users/me', authenticate, async (req, res) => {
     res.send(req.user)
 });
 
+router.get('/users/me/scores', authenticate, async (req, res) => {
+    try {
+        const scores = await User.getScores(req.user._id)
+        res.send(scores)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+
+})
+
 router.patch('/users/me', authenticate, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'email', 'password']

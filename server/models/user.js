@@ -119,6 +119,18 @@ UserSchema.statics.findByCredentials = async (email, password) => {
     return user
 };
 
+UserSchema.statics.getScores = async (_id) => {
+    const user = await User.findById(_id)
+    if(!user) {
+        throw new Error('Unable to find user')
+    }
+    return {
+        momentum: user.momentum,
+        resiliency: user.resiliency,
+        social: user.social
+    }
+}
+
 // Hash plaintext password before savings.
 UserSchema.pre('save', async function (next) {
     const user = this;

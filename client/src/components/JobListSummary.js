@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import JobListFilterModal from './JobListFilterModal'
-import ResiliencyScorePage from './ResiliencyScorePage'
-import MomentumScorePage from './MomentumScorePage'
+import ResiliencyScore from './ResiliencyScore'
+import MomentumScore from './MomentumScore'
 
 export class JobListSummary extends React.Component {
 
@@ -25,18 +25,15 @@ export class JobListSummary extends React.Component {
 
     render() {
         return (
-            <div className='page-header__inline'>
-                <ResiliencyScorePage />
-                <div>
-                    <div className='page-header__content'>
-                        <h1 className='page-header__title'>Job List Summary</h1>
-                    </div>
+            <div className='page-header'>
+                <div className='page-header__content'>
+                    <h1 className='page-header__title'>My Job List</h1>
                     <div className='page-header__actions'>
-                        <Link to='/create' className='button'>
-                            Add Application
-                        </Link>
                         <button className='button' onClick={this.handleOpenModal}>
-                            Filter Jobs
+                            <i className="fas fa-filter"></i>
+                        </button>
+                        <button className='button' onClick={() => this.props.history.push('/create')}>
+                            <i className="fas fa-plus-square fa-lg"></i>
                         </button>
                     </div>
                 </div>
@@ -44,10 +41,9 @@ export class JobListSummary extends React.Component {
                     showModal={this.state.showModal}
                     handleCloseModal={this.handleCloseModal}
                 />
-                <MomentumScorePage/>
             </div>    
         )
     }
 }
 
-export default JobListSummary
+export default withRouter(JobListSummary)

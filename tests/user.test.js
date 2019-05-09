@@ -105,6 +105,19 @@ describe('GET /users/me', () => {
     })
 })
 
+describe('GET /users/me/scores', () => {
+    it('should return user scores', async () => {
+        const user = users[0]
+        const token = user.tokens[0].token
+
+        const res = await request(app)
+            .get('/users/me/scores')
+            .set('Authorization', `Bearer ${token}`)
+            .expect(200)
+        console.log(res.body)
+    })
+})
+
 describe('GET /users/:id', () => {
     it('should return own user object', async () => {
         const user = users[0]
@@ -293,7 +306,7 @@ describe('DELETE /users/:id', () => {
 })
 
 describe('POST /users/login', () => {
-    it('should add new token to logged in user', async () => {
+    it('should send new token to user logging in', async () => {
         const testUser = users[1]
 
         const res = await request(app)
@@ -303,29 +316,7 @@ describe('POST /users/login', () => {
         expect(res.body.token).toBeTruthy()
         expect(res.body.user._id).toBeTruthy()
         expect(res.body.user.name).toBe(testUser.name)
-        
-        const user = await User.findById(res.body.user._id)
-        expect(user.tokens.length).toBe(2)
-        expect(user.tokens[0].token).toBe(testUser.tokens[0].token)
-        expect(user.tokens[1]).toMatchObject({token: res.body.token})
     })
-
-    it('should create new token for logged out user', async () => {
-        const testUser = users[3]
-
-        const res = await request(app)
-            .post('/users/login')
-            .send({email: testUser.email, password: testUser.password})
-            .expect(200)
-        expect(res.body.token).toBeTruthy()
-        expect(res.body.user._id).toBeTruthy()
-        expect(res.body.user.name).toBe(testUser.name)
-
-        const user = await User.findById(res.body.user._id)
-        expect(user.tokens.length).toBe(1)
-        expect(user.tokens[0]).toMatchObject({token: res.body.token})
-    })
-
 
     it('should return 400 on unsuccessful login attempt', async () => {
         const testUser = users[1]
@@ -335,35 +326,5 @@ describe('POST /users/login', () => {
             .send({email: testUser.email, password: testUser.password + '1!'})
             .expect(400)
         expect(res.header['x-auth']).toBeFalsy()
-        const user = await User.findById(users[1]._id)
-        expect(user.tokens.length).toBe(1)
-    })
-})
-
-describe('POST /users/logout', () => {
-    it('should remove token from user object', async () => {
-        const testUser = users[0]
-        const token = testUser.tokens[0].token
-
-        await request(app)
-            .post('/users/logout')
-            .set('Authorization', `Bearer ${token}`)
-            .expect(200)
-        const user = await User.findById(testUser._id)
-        expect(user.tokens.length).toBe(0)
-    })
-})
-
-describe('POST /users/logoutAll', () => {
-    it('should remove all tokens', async () => {
-        const testUser = users[0]
-        const token = testUser.tokens[0].token
-
-        await request(app)
-            .post('/users/logoutAll')
-            .set('Authorization', `Bearer ${token}`)
-            .expect(200)
-        const user = await User.findById(testUser._id)
-        expect(user.tokens.length).toBe(0)
     })
 })

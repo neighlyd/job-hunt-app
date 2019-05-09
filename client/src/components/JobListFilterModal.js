@@ -61,6 +61,7 @@ export class JobListFilters extends React.Component {
                 closeTimeoutMS={200}
                 contentLabel="Filter Application List"
                 onRequestClose={this.props.handleCloseModal}
+                appElement={document.querySelector('#root')}
             >       
                 <div className='filter-input-group'>
                     <div className='filter-input-group__item'>

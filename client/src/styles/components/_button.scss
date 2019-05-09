@@ -10,6 +10,7 @@
     padding: $s-size;
     text-decoration: none;
     min-width: 125px;
+    margin: $s-size;
 }
 
 .button:hover {
@@ -67,7 +68,7 @@
 }
 
 .button__archive__true {
-    background: linear-gradient(to top right, $light-purple, $purple);
+    background: linear-gradient(to top right, $purple, $orange);
 }
 
 .button__archive__true:hover {

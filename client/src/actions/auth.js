@@ -6,6 +6,7 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const AUTH_REQUEST = 'AUTH_REQUEST'
 export const AUTH_ERROR = 'AUTH_ERROR'
 export const CLEAR_AUTH_ERROR = 'CLEAR_ERROR'
+export const SET_SCORES = 'SET_SCORES'
 
 export const setCurrentUser = user => ({
     type: SET_CURRENT_USER,
@@ -23,6 +24,11 @@ const authError = error => ({
 
 export const clearAuthError = () => ({
     type: CLEAR_AUTH_ERROR
+})
+
+export const setScores = (scores) => ({
+    type: SET_SCORES,
+    payload: scores
 })
 
 export const setUser = (user) => {
@@ -62,7 +68,7 @@ export const login = ({
                     localStorage.setItem('token', res.data.token)
                 }
                 setAuthToken(res.data.token)
-                dispatch(setCurrentUser(res.data))
+                dispatch(setCurrentUser(res.data.user))
                 dispatch(getJobs())
             })
             .catch(err => {
@@ -93,6 +99,19 @@ export const register = ({
                 setAuthToken(res.data.token)
                 dispatch(setCurrentUser(res.data))
                 dispatch(getJobs())
+            })
+            .catch(err => {
+                dispatch(authError(err.response.data.error))
+            })
+    }
+}
+
+export const updateScores = () => {
+    return dispatch => {
+        axios
+            .get('/users/me/scores')
+            .then(res => {
+                dispatch(setScores(res.data))
             })
             .catch(err => {
                 dispatch(authError(err.response.data.error))

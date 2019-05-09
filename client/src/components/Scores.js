@@ -1,23 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { slide as Menu } from 'react-burger-menu'
 
-const ScoresPage = ({ user }) => {
+import MomentumScore from './MomentumScore'
+import ResiliencyScore from './ResiliencyScore'
+
+const ScoresPage = () => {
     return (
-        <div>
-            <div className='score-card'>
-                <p>{ user.resiliency }</p>
-                Resiliency
-            </div>
-            <div className='score-card'>
-                <p>{ user.momentum }</p>
-                Momentum
-            </div>
-        </div>
+        <Menu>
+           <MomentumScore/>
+           <ResiliencyScore/>
+        </Menu>
     )
 }
-
-const mapStateToProps = (state) => ({
-    user: state.auth.user
-})
-
-export default connect(mapStateToProps)(ScoresPage)
+export default ScoresPage
