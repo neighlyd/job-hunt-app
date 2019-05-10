@@ -30,6 +30,8 @@ export class JobListSummary extends React.Component {
                 <div className='page-header__content'>
                     <div className='page-header__title'>
                         <h1>My Job List</h1>
+                        <div className='show-for-mobile'><span className='green'>Momentum: {this.props.momentum}</span></div>                        
+                        <div className='show-for-mobile'><span className='purple'>Resiliency: {this.props.resiliency}</span></div>
                         <i>(Displaying: {this.props.displayed} out of {this.props.total} jobs)</i>
                     </div>
                     <div className='page-header__actions'>
@@ -53,9 +55,13 @@ export class JobListSummary extends React.Component {
 const mapStateToProps = (state) => {
     const displayed = filterJobs(state.jobs.jobs, state.jobFilters).length
     const total = state.jobs.jobs.length
+    const resiliency = state.auth.user.resiliency
+    const momentum = state.auth.user.momentum
     return {
         displayed,
-        total
+        total,
+        resiliency,
+        momentum
     }
 }
 
